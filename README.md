@@ -1,9 +1,9 @@
 ES6 Tutorial
 =================
 
-##Setting Up Grunt and Traceur
-###Install traceur
-You can install traceur compiler using npm.
+##Setting Up Grunt ( or Gulp ) and Traceur
+###Install Traceur
+You can install Traceur compiler using npm.
 
 ```
 npm install -g traceur --save-dev
@@ -19,7 +19,7 @@ npm install grunt-contrib-watch --save-dev
 ```
 
 ###Setup Gruntfile.js
-Here is the sample setup to run traceur from your grunt:
+Here is the sample setup to run Traceur from your grunt:
 
 ```
 ...
@@ -75,6 +75,21 @@ Run your grunt watch and you are ready to code in ES6.
 ```
 grunt watch:traceur
 ```
+
+###Install Gulp Plugins
+In my opinion it's more make sense to use Gulp on the converting process since I
+see this as a series of tubes and we need to process the files from one end to the
+other.
+// TODO: Add information on using Gulp in with Traceur
+```
+npm install -g gulp-traceur
+```
+
+// TODO: Add information on setting up Traceur in gulp
+
+###Debugging ES6 Traceur
+// TODO: Add information on setting up debugger for ES6
+
 
 ##New in ES6
 ###Let Keyword
@@ -177,10 +192,103 @@ because they don't have any default value assigned to the function argument.
 Calling a function with default value without any argument in ES6 will
 automatically use the default value assigned to function argument.
 ```
-greet();                // return undefined, John
-greet('Hello');         // return Hello, John
-greet('Hello', 'Bill'); // return Hello, Bill
+greet();                // it should 'print undefined, John'
+greet('Hello');         // it should 'print Hello, John'
+greet('Hello', 'Bill'); // it should 'print Hello, Bill'
 ```
 
+A function can be assigned as a default value too:
+```
+function receive( complete = ()=> console.log('complete')) {
+  // Call the function passed in the argument, use default if nothing is passed
+  complete();
+});
 
+receive(); // it should print 'complete'
+receive(function(){
+  console.log('the other complete');
+}); 
+// it should print 'the other complete'
+```
+
+###Destructuring Assignment
+This come handy if you want to weed out the data out of a return value from a
+function, by grabbing certain attribute from an object
+```
+function returnSomething(){
+  return{
+    first_name : 'Dexter',
+    last_name  : 'Morgan',
+    state      : 'Alaska',
+    position   : 'Lumberjack'
+  }
+}
+var {first_name: name, state} = returnSomething();
+console.log(name);
+console.log(state);
+```
+This also works with arrays
+```
+var people = [
+  {
+    first_name : 'Dexter',
+    last_name  : 'Morgan',
+    state      : 'Alaska',
+    position   : 'Lumberjack'
+  }, {
+    first_name : 'Hanibal',
+    last_name  : 'Lechter',
+    state      : 'Minnesota',
+    position   : 'Therapist'
+  }, {
+    first_name : 'Joe',
+    last_name  : 'Caroll',
+    state      : 'New York',
+    position   : 'Literature Professor'
+  }, {
+    first_name : 'Norman',
+    last_name  : 'Bates',
+    state      : 'California',
+    position   : 'Motel Owner'
+  }
+];
+
+people.forEach(({first_name})=> console.log(first_name));
+```
+The code above will walk through the array item and grab the `first_name`
+attribute of the item and console it out.
+
+###Array Comprehensions
+Using the same data from above example we can create a new array and just picking
+certain attribute as the new array member.
+```
+let positions = [for({position} of people) position];
+let positionOnlyLechter = [for({position, last_name} of people) if(last_name==='Lechter') position];
+
+console.log(positions);
+console.log(positionOnlyLechter);
+```
+Previously you need to use library like underscore to process array, doing a
+filter etc. now with ES6 you don't need external library to do array processing.
+Here is another example on how filtering work on arrays with number as the array
+items.
+```
+var nums = [1,2,3,4,5,6,7,8,9,10];
+var filtered = [for( num of nums ) if( num > 5 ) num];
+
+console.log(filtered); // it should print '[6, 7, 8, 9, 10]'
+```
+Using Array comprehensions you can easily build up the matrix from 2 arrays like
+this:
+```
+var nums = [1, 2, 3, 4, 5, 6, 7, 8];
+var letters = ['a', 'b', 'c', 'd', 'e'];
+
+var matrix = [for(num of nums)[for(letter of letters) num + letter]];
+
+console.log(matrix);
+```
+Notice how we can write array loop inside another array loop.
+
+###String Templates
 
