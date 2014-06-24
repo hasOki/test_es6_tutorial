@@ -13,14 +13,28 @@ fs.forEach(function(f){
 
 fs=[];
 for( let i = 0; i<10; i++){
-  fs.push(function(){
+  fs[i] = function(){
     console.log(i);
-  });
+  };
 }
 
 fs.forEach(function(f){
   f();
 });
+
+
+// Constant
+// ===========
+console.log('---\nConstant Variable Sample\n===');
+const PI = 3.14159;
+console.log(PI); // it should print '3.14159'
+PI = 3;          // it should not re-assign PI
+console.log(PI); // it should still print '3.14159'
+const PI = 4;    // it should not re-initialize PI
+console.log(PI); // it should still print '3.14159'
+var PI = 5;      // it should not re-declare PI
+console.log(PI); // it should still print '3.14159'
+
 
 // Arrow Function
 // ==============
@@ -155,4 +169,50 @@ console.log(matrix);
 // String Templates
 // ===========================
 console.log('---\nString Templates\n===');
+
+var greeting = 'Hallo';
+console.log( `${greeting} World` );
+
+var i = 5, j = 10;
+console.log(`${i} + ${j} = ${i + j}`);
+
+function check(strings, ...values){
+  if( values[0] === 'GabaGaba' ){
+    values[1] = 'awesome';
+  } else {
+    values[1] = 'cool';
+  }
+  return `${strings[0]}${values[0]}${strings[1]}${values[1]}`;
+}
+
+var character = 'GabaGaba';
+console.log( check`Yo ${character} is ${''}` );
+character = 'Bro';
+console.log( check`Yo ${character} is ${''}` );
+
+
+// Classes
+// ===========================
+console.log('---\nClasses\n===');
+class Language{
+  constructor( name, founder, year){
+    this.name = name;
+    this.founder = founder;
+    this.year = year;
+  }
+  summary(){
+    return `${this.name} was created by ${this.founder} in ${this.year}`;
+  }
+}
+
+class MetaLanguage extends Language{
+  constructor( x, y, z, version){
+    super( x, y, z );
+    this.version = version;
+  }
+}
+
+
+
+
 

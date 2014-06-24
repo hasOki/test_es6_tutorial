@@ -1,14 +1,14 @@
 ES6 Tutorial
 =================
 
-##Setting Up Grunt ( or Gulp ) and Traceur
-###Install Traceur
+###Setting Up Grunt ( or Gulp ) and Traceur
+####Install Traceur
 You can install Traceur compiler using npm.
 
 ```
 npm install -g traceur --save-dev
 ```
-###Install Grunt Plugins
+####Install Grunt Plugins
 If you want to automate the build process you can also install `grunt-traceur` and
 `grunt-contrib-watch`, and see it rebuild your ES6 to browser friendly ES5 on top of
 `traceur-runtime`.
@@ -18,7 +18,7 @@ npm install grunt-traceur --save-dev
 npm install grunt-contrib-watch --save-dev
 ```
 
-###Setup Gruntfile.js
+####Setup Gruntfile.js
 Here is the sample setup to run Traceur from your grunt:
 
 ```
@@ -76,7 +76,7 @@ Run your grunt watch and you are ready to code in ES6.
 grunt watch:traceur
 ```
 
-###Install Gulp Plugins
+####Install Gulp Plugins
 In my opinion it's more make sense to use Gulp on the converting process since I
 see this as a series of tubes and we need to process the files from one end to the
 other.
@@ -87,12 +87,12 @@ npm install -g gulp-traceur
 
 // TODO: Add information on setting up Traceur in gulp
 
-###Debugging ES6 Traceur
+####Debugging ES6 Traceur
 // TODO: Add information on setting up debugger for ES6
 
 
-##New in ES6
-###Let Keyword
+###New in ES6
+####Let Keyword
 We know about var in JavaScript, and it has gotchas when you use it in scoping.  
 Take a look a this simple for loops example:
 
@@ -102,9 +102,9 @@ var logs = [];
 
 // Append the logs array with functions
 for( var i = 0; i < 5; i++ ){
-  logs.push( function(){
+  logs[i] = function(){
     console.log(i);
-  });
+  };
 }
 
 // Run through the function array
@@ -138,19 +138,39 @@ see the result showing the number sequence correctly
 for( let i = 0; i < 5; i++ )
 ...
 ```
-###Arrow Function
+
+####Const
+ES6 has constant keyword using `const`, once you initialize it you can't reassign,
+reinitialize or redeclare it.
+```
+const PI = 3.14159
+console.log(PI); // it should print '3.14159'
+PI = 3           // it should not re-assign PI
+console.log(PI); // it should still print '3.14159'
+const PI = 4     // it should not re-initialize PI
+console.log(PI); // it should still print '3.14159'
+var PI = 5       // it should not re-declare PI
+console.log(PI); // it should still print '3.14159'
+```
+//TODO: Somehow this is not working in nodejs.
+
+####Map and Sets
+
+
+
+####Arrow Function
 The Arrow `=>` is replacing the way you declare class in javascript. Here is a
 sample translation from regular function declaration to the Arrow Function
 declaration:
 
-#####Original Function Declaration
+**Original Function Declaration**
 ```
 var createGreetings = function(message, name){
   return message + name;
 }
 ```
 
-#####ES6 Function Declaration
+**ES6 Function Declaration**
 ```
 var arrowGreeting = (message, name) => message + name;
 ```
@@ -172,7 +192,7 @@ var messageObj = {
 }
 ```
 
-###Default Value for Function
+####Default Value for Function
 ES6 introduce a capability to assign a default value to the function argument.
 Here is an example:
 ```
@@ -211,7 +231,7 @@ receive(function(){
 // it should print 'the other complete'
 ```
 
-###Destructuring Assignment
+####Destructuring Assignment
 This come handy if you want to weed out the data out of a return value from a
 function, by grabbing certain attribute from an object
 ```
@@ -258,7 +278,11 @@ people.forEach(({first_name})=> console.log(first_name));
 The code above will walk through the array item and grab the `first_name`
 attribute of the item and console it out.
 
-###Array Comprehensions
+####Iterators
+We can use the new `for-of` with Array, set and map.
+
+
+####Array Comprehensions
 Using the same data from above example we can create a new array and just picking
 certain attribute as the new array member.
 ```
@@ -288,7 +312,93 @@ var matrix = [for(num of nums)[for(letter of letters) num + letter]];
 
 console.log(matrix);
 ```
-Notice how we can write array loop inside another array loop.
+Notice how we can write array loop inside another array loop, and you should see
+this result in your console / terminal
+```
+[ [ '1a', '1b', '1c', '1d' ],
+  [ '2a', '2b', '2c', '2d' ],
+  [ '3a', '3b', '3c', '3d' ],
+  [ '4a', '4b', '4c', '4d' ],
+  [ '5a', '5b', '5c', '5d' ],
+  [ '6a', '6b', '6c', '6d' ],
+  [ '7a', '7b', '7c', '7d' ],
+  [ '8a', '8b', '8c', '8d' ] ]
+```
 
-###String Templates
+####String Templates
+With ES6 you can use template in your code build in without using any framework.
+The string templates is defined by surrounding your template inside `` `
+(_backtick_) symbol.
+It accept regular string and you can also do expression inside the curly braces.
+```
+var greeting = 'Hallo';
+console.log( `${greeting} World` );
+
+var i = 5, j = 10;
+console.log(`${i} + ${j} = ${i + j}`);
+```
+You can also process your template through a function by prepends the function name
+before the string template.
+```
+// Sample function to check for the value in the template
+function check( strings, ...values){
+  if( values[0] === 'GabaGaba' ){
+    values[1] = ' is awesome';
+  } else {
+    values[1] = ' is cool';
+  }
+  return `${strings[0]}${values[0]${string[1]}${values[1]}}`
+}
+
+var character = 'GabaGaba';
+console.log( check`Yo ${character} is ${''}`);
+// It should print 'Yo GabGaba is awesome'
+
+character = 'Bro';
+console.log( check`Yo ${character} is ${''}`);
+// It should print 'Yo Bro is cool'
+```
+
+####Classes
+
+```
+class Language{
+  constructor( name, founder, year){
+    this.name = name;
+    this.founder = founder;
+    this.year = year;
+  }
+  summary(){
+    return `${this.name} was created by ${this.founder} in ${this.year}`;
+  }
+}
+
+class MetaLanguage extends Language{
+  constructor( x, y, z, version){
+    super( x, y, z );
+    this.version = version;
+  }
+}
+```
+
+
+
+
+####Modules
+
+
+####Collections
+
+
+####Rest Parameters and Spread Operators
+
+
+####Generators
+// TODO: Learn more about this, should be good solution to replace the call back
+waterfall, chain the next actions using `yield`
+
+
+
+
+
 

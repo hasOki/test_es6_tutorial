@@ -1,5 +1,7 @@
 "use strict";
 var __moduleName = (void 0);
+var $__0 = Object.freeze(Object.defineProperties(["Yo ", " is ", ""], {raw: {value: Object.freeze(["Yo ", " is ", ""])}})),
+    $__1 = Object.freeze(Object.defineProperties(["Yo ", " is ", ""], {raw: {value: Object.freeze(["Yo ", " is ", ""])}}));
 console.log('---\nLet Keyword Sample\n===');
 var fs = [];
 for (var i = 0; i < 10; i++) {
@@ -22,7 +24,7 @@ fs = [];
       } catch (i) {
         i = $i;
         try {
-          fs.push(function() {
+          $traceurRuntime.setProperty(fs, i, function() {
             console.log(i);
           });
         } finally {
@@ -35,6 +37,15 @@ fs = [];
 fs.forEach(function(f) {
   f();
 });
+console.log('---\nConstant Variable Sample\n===');
+var PI = 3.14159;
+console.log(PI);
+PI = 3;
+console.log(PI);
+var PI = 4;
+console.log(PI);
+var PI = 5;
+console.log(PI);
 console.log('---\nArrow Function Samples\n===');
 var deliveryBoy = {
   name: 'Johny',
@@ -55,9 +66,9 @@ var deliveryBoyArrow = {
     handler(message);
   },
   receive: function() {
-    var $__0 = this;
+    var $__2 = this;
     this.handleMessage('Hello, ', (function(message) {
-      return console.log(message + $__0.name);
+      return console.log(message + $__2.name);
     }));
   }
 };
@@ -94,9 +105,9 @@ function returnSomething() {
     position: 'Lumberjack'
   };
 }
-var $__5 = returnSomething(),
-    name = $__5.last_name,
-    state = $__5.state;
+var $__9 = returnSomething(),
+    name = $__9.last_name,
+    state = $__9.state;
 console.log(name);
 console.log(state);
 var people = [{
@@ -120,30 +131,30 @@ var people = [{
   state: 'California',
   position: 'Motel Owner'
 }];
-people.forEach((function($__5) {
-  var first_name = $__5.first_name;
+people.forEach((function($__9) {
+  var first_name = $__9.first_name;
   return console.log(first_name);
 }));
 console.log('---\nArray Comprehensions\n===');
 var positions = (function() {
-  var $__1 = 0,
-      $__2 = [];
-  for (var $__3 = people[$traceurRuntime.toProperty(Symbol.iterator)](),
-      $__4; !($__4 = $__3.next()).done; ) {
+  var $__4 = 0,
+      $__5 = [];
+  for (var $__6 = people[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__7; !($__7 = $__6.next()).done; ) {
     try {
       throw undefined;
     } catch (position) {
-      position = $__4.value.position;
-      $traceurRuntime.setProperty($__2, $__1++, position);
+      position = $__7.value.position;
+      $traceurRuntime.setProperty($__5, $__4++, position);
     }
   }
-  return $__2;
+  return $__5;
 }());
 var positionOnlyLechter = (function() {
-  var $__1 = 0,
-      $__2 = [];
-  for (var $__3 = people[$traceurRuntime.toProperty(Symbol.iterator)](),
-      $__4; !($__4 = $__3.next()).done; ) {
+  var $__4 = 0,
+      $__5 = [];
+  for (var $__6 = people[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__7; !($__7 = $__6.next()).done; ) {
     try {
       throw undefined;
     } catch (last_name) {
@@ -152,67 +163,102 @@ var positionOnlyLechter = (function() {
       } catch (position) {
         try {
           throw undefined;
-        } catch ($__6) {
+        } catch ($__10) {
           {
-            $__6 = $__4.value;
-            position = $__6.position;
-            last_name = $__6.last_name;
+            $__10 = $__7.value;
+            position = $__10.position;
+            last_name = $__10.last_name;
           }
           if (last_name === 'Lechter')
-            $traceurRuntime.setProperty($__2, $__1++, position);
+            $traceurRuntime.setProperty($__5, $__4++, position);
         }
       }
     }
   }
-  return $__2;
+  return $__5;
 }());
 console.log(positions);
 console.log(positionOnlyLechter);
 var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 var filtered = (function() {
-  var $__1 = 0,
-      $__2 = [];
-  for (var $__3 = nums[$traceurRuntime.toProperty(Symbol.iterator)](),
-      $__4; !($__4 = $__3.next()).done; ) {
+  var $__4 = 0,
+      $__5 = [];
+  for (var $__6 = nums[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__7; !($__7 = $__6.next()).done; ) {
     try {
       throw undefined;
     } catch (num) {
-      num = $__4.value;
+      num = $__7.value;
       if (num > 5)
-        $traceurRuntime.setProperty($__2, $__1++, num);
+        $traceurRuntime.setProperty($__5, $__4++, num);
     }
   }
-  return $__2;
+  return $__5;
 }());
 console.log(filtered);
 var nums = [1, 2, 3, 4, 5, 6, 7, 8];
 var letters = ['a', 'b', 'c', 'd'];
 var matrix = (function() {
-  var $__1 = 0,
-      $__2 = [];
-  for (var $__3 = nums[$traceurRuntime.toProperty(Symbol.iterator)](),
-      $__4; !($__4 = $__3.next()).done; ) {
+  var $__4 = 0,
+      $__5 = [];
+  for (var $__6 = nums[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__7; !($__7 = $__6.next()).done; ) {
     try {
       throw undefined;
     } catch (num) {
-      num = $__4.value;
-      $traceurRuntime.setProperty($__2, $__1++, (function() {
-        var $__1 = 0,
-            $__2 = [];
-        for (var $__3 = letters[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__4; !($__4 = $__3.next()).done; ) {
+      num = $__7.value;
+      $traceurRuntime.setProperty($__5, $__4++, (function() {
+        var $__4 = 0,
+            $__5 = [];
+        for (var $__6 = letters[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__7; !($__7 = $__6.next()).done; ) {
           try {
             throw undefined;
           } catch (letter) {
-            letter = $__4.value;
-            $traceurRuntime.setProperty($__2, $__1++, num + letter);
+            letter = $__7.value;
+            $traceurRuntime.setProperty($__5, $__4++, num + letter);
           }
         }
-        return $__2;
+        return $__5;
       }()));
     }
   }
-  return $__2;
+  return $__5;
 }());
 console.log(matrix);
 console.log('---\nString Templates\n===');
+var greeting = 'Hallo';
+console.log((greeting + " World"));
+var i = 5,
+    j = 10;
+console.log((i + " + " + j + " = " + (i + j)));
+function check(strings) {
+  for (var values = [],
+      $__8 = 1; $__8 < arguments.length; $__8++)
+    $traceurRuntime.setProperty(values, $__8 - 1, arguments[$traceurRuntime.toProperty($__8)]);
+  if (values[$traceurRuntime.toProperty(0)] === 'GabaGaba') {
+    $traceurRuntime.setProperty(values, 1, 'awesome');
+  } else {
+    $traceurRuntime.setProperty(values, 1, 'cool');
+  }
+  return ("" + strings[$traceurRuntime.toProperty(0)] + values[$traceurRuntime.toProperty(0)] + strings[$traceurRuntime.toProperty(1)] + values[$traceurRuntime.toProperty(1)]);
+}
+var character = 'GabaGaba';
+console.log(check($__0, character, ''));
+character = 'Bro';
+console.log(check($__1, character, ''));
+console.log('---\nClasses\n===');
+var Language = function Language(name, founder, year) {
+  this.name = name;
+  this.founder = founder;
+  this.year = year;
+};
+($traceurRuntime.createClass)(Language, {summary: function() {
+    return (this.name + " was created by " + this.founder + " in " + this.year);
+  }}, {});
+var MetaLanguage = function MetaLanguage(x, y, z, version) {
+  $traceurRuntime.superCall(this, $MetaLanguage.prototype, "constructor", [x, y, z]);
+  this.version = version;
+};
+var $MetaLanguage = MetaLanguage;
+($traceurRuntime.createClass)(MetaLanguage, {}, {}, Language);
