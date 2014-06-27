@@ -382,10 +382,42 @@ class MetaLanguage extends Language{
 ```
 
 
-
-
 ####Modules
 
+#####Exporting as Module
+Use `export` to create the Module
+```
+export class BaseClass(){
+  ...
+}
+```
+#####Importing Module
+Import is much simpler than in ES6 and remember that _Variable Destructuring_ that
+comes handy when you want to pass 2 or more variables using export in your module.
+```
+import BaseClass from './baseClass';
+
+// or 
+
+import { var1, var 2 } from './module';
+
+// or
+
+import './module' as mymodule;
+```
+
+#####Compiling ES6 as Modules
+**Using Grunt**
+```
+npm install grunt-es6-module-transpiler --save-dev
+```
+grunt settings
+```
+```
+
+**Using Command Line**
+```
+```
 
 ####Collections
 
